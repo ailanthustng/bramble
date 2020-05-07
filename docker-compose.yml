@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  fastapi:
+    build:
+      context: ./
+      dockerfile: ./compose/fastapi/Dockerfile
+    image: bramble:0.0.1
+    volumes:
+      - ./bramble:/app
+    ports:
+      - 80:80
+    entrypoint: tail -f /dev/null
