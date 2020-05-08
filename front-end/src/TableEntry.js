@@ -1,8 +1,8 @@
 import React from "react";
+
 import Moment from 'react-moment';
 
 function TableEntry(props) {
-    const date = new Date();
     return(
         <tr>
             <td>{props.index}</td>

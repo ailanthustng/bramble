@@ -1,5 +1,7 @@
 import React from "react";
+
 import Table from 'react-bootstrap/Table';
+
 import TableEntry from './TableEntry';
 
 function OverallTable() {

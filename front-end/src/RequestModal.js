@@ -1,6 +1,8 @@
 import React from "react";
+
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+
+import RequestForm from "./RequestForm";
 
 function RequestModal(props) {
     return(
@@ -14,11 +16,8 @@ function RequestModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>request form goes here</h4>
+                <RequestForm onClick={props.onHide}/>
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={props.onClose}>Close</Button>
-            </Modal.Footer>
         </Modal>
     );
 }

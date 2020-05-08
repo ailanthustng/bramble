@@ -1,5 +1,7 @@
 import React, {useState} from "react";
+
 import Button from 'react-bootstrap/Button';
+
 import RequestModal from "./RequestModal";
 
 function RequestButton() {
@@ -13,7 +15,7 @@ function RequestButton() {
 
             <RequestModal
                 show={modalShow}
-                onClose={() => setModalShow(false)}
+                onHide={() => setModalShow(false)}
             />
         </div>
     );
