@@ -1,6 +1,15 @@
 version: "3"
 
 services:
+  caddy:
+    image: caddy:alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./compose/caddy/Caddyfile:/tmp/Caddyfile
+    entrypoint: caddy run --environ --adapter caddyfile --config /tmp/Caddyfile
+
   fastapi:
     build:
       context: ./
@@ -8,6 +17,11 @@ services:
     image: bramble:0.0.1
     volumes:
       - ./bramble:/app
-    ports:
-      - 80:80
+    entrypoint: tail -f /dev/null
+
+  front-end:
+    image: node:12.16.3-stretch-slim
+    volumes:
+      - ./front-end:/src
+    working_dir: /src
     entrypoint: tail -f /dev/null

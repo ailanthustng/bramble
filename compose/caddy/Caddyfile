@@ -1,0 +1,5 @@
+bramble.localhost {
+    reverse_proxy /api/* http://fastapi
+    reverse_proxy /* http://front-end:3000
+    tls internal
+}

@@ -2,7 +2,7 @@ from fastapi import FastAPI, Header
 
 from app.handlers import router
 
-app = FastAPI(docs_url="/")
+app = FastAPI()
 
 
 async def get_token_header(x_token: str = Header(...)):
@@ -12,7 +12,7 @@ async def get_token_header(x_token: str = Header(...)):
 
 app.include_router(
     router,
-    prefix="/keys",
+    prefix="/api/keys",
     tags=["keys"],
     # dependencies=[Depends(get_token_header)],
     responses={404: {"description": "Not found"}},
