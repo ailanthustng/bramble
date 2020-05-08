@@ -31,7 +31,7 @@ function RequestForm(props) {
 
 function handleSubmit() {
     console.log("test");
-    axios.get('http://localhost/keys/?user=27a53581-f09a-4a07-97a2-3454342f7ccb')
+    axios.get('/api/keys/?user=27a53581-f09a-4a07-97a2-3454342f7ccb')
         .then(res => {
             console.log(res.data);
         });
