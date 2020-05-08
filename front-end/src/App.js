@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,23 +13,26 @@ import RequestButton from "./RequestButton";
 
 
 function App() {
-    return (
-        <div className="background">
-            <Jumbotron className="jumbo" fluid={true}>
-                <Container className="contain" fluid>
-                    <Row>
-                        <Col sm={11}>
-                            <h1>Hello name-of-user!</h1>
-                        </Col>
-                        <Col className="reqbutton" sm={1}>
-                            <RequestButton/>
-                        </Col>
-                    </Row>
-                </Container>
-                <OverallTable/>
-            </Jumbotron>
-        </div>
-    );
+  const [data, setData] = useState();
+
+  return (
+    <div className="background">
+      <Jumbotron className="jumbo" fluid={true}>
+        <Container className="contain" fluid>
+          <Row>
+            <Col sm={11}>
+              <h1>Hello name-of-user!</h1>
+            </Col>
+            <Col className="reqbutton" sm={1}>
+              <RequestButton setData={setData}/>
+              <h1>{data && data.api_key}</h1>
+            </Col>
+          </Row>
+        </Container>
+        <OverallTable/>
+      </Jumbotron>
+    </div>
+  );
 }
 
 export default App;

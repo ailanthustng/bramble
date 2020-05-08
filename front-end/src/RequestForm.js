@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 
-function RequestForm(props) {
+function RequestForm({setData, hideModal}) {
   const [app, setApp] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -28,10 +28,9 @@ function RequestForm(props) {
         }
       })
         .then(res => {
-          console.log(res.status);
-          console.log(res.data);
+          setData(res.data);
         });
-      props.onClick();
+      hideModal();
     }
   }
 
@@ -49,8 +48,8 @@ function RequestForm(props) {
       </Form.Group>
       <Alert show={show} variant="danger" onClose={() => setShow(false)}>Please choose an application!</Alert>
       <Modal.Footer>
-        <Button onClick={() => handleSubmit(props)}>Submit</Button>
-        <Button onClick={props.onClick}>Close</Button>
+        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={hideModal}>Close</Button>
       </Modal.Footer>
     </Form>
   );

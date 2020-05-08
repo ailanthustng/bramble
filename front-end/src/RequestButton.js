@@ -4,21 +4,22 @@ import Button from 'react-bootstrap/Button';
 
 import RequestModal from "./RequestModal";
 
-function RequestButton() {
-    const [modalShow, setModalShow] = useState(false);
+function RequestButton({setData}) {
+  const [modalShow, setModalShow] = useState(false);
 
-    return (
-        <div>
-            <Button variant="primary" onClick={() => setModalShow(true)}>
-                Request Key
-            </Button>
+  return (
+    <div>
+      <Button variant="primary" onClick={() => {setModalShow(true)}}>
+        Request Key
+      </Button>
 
-            <RequestModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
-        </div>
-    );
+      <RequestModal
+        show={modalShow}
+        hideModal={() => setModalShow(false)}
+        setData={setData}
+      />
+    </div>
+  );
 }
 
 
