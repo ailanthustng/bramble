@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 
-function RequestForm({setData, hideModal}) {
+function RequestForm({addKey, hideModal}) {
   const [app, setApp] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -28,7 +28,7 @@ function RequestForm({setData, hideModal}) {
         }
       })
         .then(res => {
-          setData(res.data);
+          addKey(res.data);
         });
       hideModal();
     }

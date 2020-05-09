@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 
 import RequestForm from "./RequestForm";
 
-function RequestModal({setData, hideModal, show}) {
+function RequestModal({addKey, hideModal, show}) {
   return (
     <Modal
       show={show}
@@ -17,7 +17,7 @@ function RequestModal({setData, hideModal, show}) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <RequestForm hideModal={hideModal} setData={setData}/>
+        <RequestForm hideModal={hideModal} addKey={incomingKey => addKey(incomingKey)}/>
       </Modal.Body>
     </Modal>
   );

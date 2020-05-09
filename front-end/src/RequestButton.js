@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 import RequestModal from "./RequestModal";
 
-function RequestButton({setData}) {
+function RequestButton({addKey}) {
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ function RequestButton({setData}) {
       <RequestModal
         show={modalShow}
         hideModal={() => setModalShow(false)}
-        setData={setData}
+        addKey={incomingKey => addKey(incomingKey)}
       />
     </div>
   );
