@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import Table from 'react-bootstrap/Table';
 
 import TableEntry from './TableEntry';
-import axios from "axios";
 
 function OverallTable({storedKeys, user, removeKey}) {
 

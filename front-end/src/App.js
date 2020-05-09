@@ -22,9 +22,8 @@ function App() {
     axios.get('/api/keys/', {params: {user}})
       .then(res => {
         setKeys(res.data);
-        console.log(res.data);
       });
-  }, []);
+  }, [user]);
 
   const addKey = incomingKey => {
     setKeys([...storedKeys, incomingKey]);
@@ -37,7 +36,7 @@ function App() {
   return (
     <div className="background">
       <Jumbotron className="jumbo" fluid={true}>
-        <Container className="contain" fluid>
+        <Container className="contain">
           <Row>
             <Col sm={11}>
               <h1>Hello name-of-user!</h1>
@@ -47,7 +46,10 @@ function App() {
             </Col>
           </Row>
         </Container>
-        <OverallTable storedKeys={storedKeys} user={user} removeKey={keyToBeDeleted => removeKey(keyToBeDeleted)}/>
+        <OverallTable
+          storedKeys={storedKeys}
+          user={user}
+          removeKey={keyToBeDeleted => removeKey(keyToBeDeleted)}/>
       </Jumbotron>
     </div>
   );
