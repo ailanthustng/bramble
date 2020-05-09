@@ -8,7 +8,6 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 
 import OverallTable from './OverallTable';
 import RequestButton from "./RequestButton";
@@ -31,6 +30,10 @@ function App() {
     setKeys([...storedKeys, incomingKey]);
   }
 
+  const removeKey = keyToBeDeleted => {
+    setKeys(currentKeys => currentKeys.filter(key => key["api_key"] !== keyToBeDeleted));
+  }
+
   return (
     <div className="background">
       <Jumbotron className="jumbo" fluid={true}>
@@ -41,11 +44,10 @@ function App() {
             </Col>
             <Col className="reqbutton" sm={1}>
               <RequestButton addKey={incomingKey => addKey(incomingKey)}/>
-              {/*<Button variant="danger" onClick={() => getKeys()}>GET</Button>*/}
             </Col>
           </Row>
         </Container>
-        <OverallTable storedKeys={storedKeys}/>
+        <OverallTable storedKeys={storedKeys} user={user} removeKey={keyToBeDeleted => removeKey(keyToBeDeleted)}/>
       </Jumbotron>
     </div>
   );
