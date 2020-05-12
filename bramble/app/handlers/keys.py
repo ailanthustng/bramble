@@ -1,22 +1,21 @@
 import secrets
 
 from pydantic import UUID4
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 import app.db as db
+from app.utils import get_user_uuid
 
 
 router = APIRouter()
 
 @router.get("/")
-async def list_keys(user: UUID4):
-    # TODO read user uuid from the token instead of from a query parameter
+async def list_keys(user: UUID4 = Depends(get_user_uuid)):
     return db.list_by_user(user)
 
 
 @router.post("/")
-async def create(user: UUID4, app: str):
-    # TODO read user uuid from the token instead of from a query parameter
+async def create(app: str, user: UUID4 = Depends(get_user_uuid)):
     # TODO Validate that the app is among the valid apps
     # TODO check for exception during create
 
@@ -25,9 +24,7 @@ async def create(user: UUID4, app: str):
 
 
 @router.delete("/")
-async def revoke(user: UUID4, api_key: str):
-    # TODO read user uuid from the token instead of from a query parameter
-
+async def revoke(api_key: str, user: UUID4 = Depends(get_user_uuid)):
     # TODO validate api_key length
     # TODO validate owner actually owns this api_key
     # TODO check for exception during delete
