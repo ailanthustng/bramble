@@ -1,5 +1,18 @@
 bramble.localhost {
-    reverse_proxy /api/* http://fastapi
-    reverse_proxy /* http://front-end:3000
+    reverse_proxy http://gatekeeper
     tls internal
+}
+
+keycloak.localhost {
+    reverse_proxy http://keycloak:8080 {
+        header_up X-Forwarded-Proto {http.request.scheme}
+        header_up X-Forwarded-For {http.request.remote.host}
+    }
+    tls internal
+}
+
+caddy.localhost {
+    file_server /root.crt {
+        root /data/caddy/pki/authorities/local/
+    }
 }

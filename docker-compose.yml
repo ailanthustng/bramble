@@ -9,6 +9,29 @@ services:
     volumes:
       - ./compose/caddy/Caddyfile:/tmp/Caddyfile
     entrypoint: caddy run --environ --adapter caddyfile --config /tmp/Caddyfile
+    networks:
+      default:
+        aliases:
+          - caddy.localhost
+          - keycloak.localhost
+          - bramble.localhost
+
+  gatekeeper:
+    image: alpine:3.8
+    volumes:
+      - ./compose/gatekeeper/:/gatekeeper/:ro
+      - ./compose/gatekeeper/bramble-config.yml:/tmp/config.yml:ro
+    entrypoint: /gatekeeper/start.sh
+    depends_on:
+      - keycloak
+    environment:
+      CLIENT_NAME: bramble
+
+  bramble-internal:
+    image: caddy:alpine
+    volumes:
+      - ./compose/caddy/bramble-internal.Caddyfile:/tmp/Caddyfile
+    entrypoint: caddy run --environ --adapter caddyfile --config /tmp/Caddyfile
 
   fastapi:
     build:
@@ -25,3 +48,37 @@ services:
       - ./front-end:/src
     working_dir: /src
     entrypoint: tail -f /dev/null
+
+  keycloak:
+    image: jboss/keycloak:10.0.1
+    container_name: keycloak
+    depends_on:
+      - caddy
+    volumes:
+      - ./compose/keycloak/setup.sh:/setup.sh:ro
+      - ./compose/keycloak/start.sh:/start.sh:ro
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: keycloak-postgres
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_SCHEMA: public
+      DB_PASSWORD: password
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+      PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_HOME: /opt/jboss/keycloak
+    entrypoint: /start.sh
+
+  keycloak-postgres:
+    image: postgres:12
+    container_name: keycloak-postgres
+    volumes:
+      - keycloak-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+
+volumes:
+  keycloak-postgres:
