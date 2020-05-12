@@ -49,13 +49,6 @@
     border-radius: 2px;
 }
 
-.contain {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.reqbutton {
-    flex-basis: auto;
-    justify-content: flex-end;
+.reqButton {
+    align-items: end;
 }

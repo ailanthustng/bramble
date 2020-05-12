@@ -9,9 +9,12 @@ function RequestButton({addKey}) {
 
   return (
     <div>
-      <Button variant="primary" onClick={() => {
-        setModalShow(true)
-      }}>
+      <Button
+        variant="primary"
+        onClick={() => {
+          setModalShow(true)
+        }}
+      >
         Request Key
       </Button>
 
@@ -23,6 +26,5 @@ function RequestButton({addKey}) {
     </div>
   );
 }
-
 
 export default RequestButton;

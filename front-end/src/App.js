@@ -36,13 +36,13 @@ function App() {
   return (
     <div className="background">
       <Jumbotron className="jumbo" fluid={true}>
-        <Container className="contain">
+        <Container fluid={true}>
           <Row>
-            <Col sm={11}>
+            <Col xs={10}>
               <h1>Hello name-of-user!</h1>
             </Col>
-            <Col className="reqbutton" sm={1}>
-              <RequestButton addKey={incomingKey => addKey(incomingKey)}/>
+            <Col xs={2}>
+              <RequestButton className="reqButton" addKey={incomingKey => addKey(incomingKey)}/>
             </Col>
           </Row>
         </Container>

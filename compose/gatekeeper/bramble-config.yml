@@ -1,0 +1,18 @@
+client-id: bramble
+discovery-url: https://keycloak.localhost/auth/realms/applications
+encryption-key: yb96KrChmqnEOHuIbBi650T7VDqyTwLZ
+
+scopes:
+  - bramble
+
+# Turn on debug
+verbose: true
+
+enable-refresh-tokens: true
+
+listen: :80
+redirection-url: https://bramble.localhost
+upstream-url: https://bramble-internal:443
+
+# Everything requires login
+enable-default-deny: true
