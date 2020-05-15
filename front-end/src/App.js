@@ -14,13 +14,15 @@ import RequestButton from "./RequestButton";
 
 
 function App() {
-  let user = '27a53581-f09a-4a07-97a2-3454342f7ccb';
+  const [user, setUser] = useState(null);
 
   const [storedKeys, setKeys] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/keys/', {params: {user}})
+    axios.get('/api/keys/')
       .then(res => {
+        setUser(res.headers["x-user-name"]);
+        console.log(res.data);
         setKeys(res.data);
       });
   }, [user]);
@@ -39,7 +41,7 @@ function App() {
         <Container fluid={true}>
           <Row>
             <Col xs={10}>
-              <h1>Hello name-of-user!</h1>
+              <h1>Hello <u>{user}</u>!</h1>
             </Col>
             <Col xs={2}>
               <RequestButton className="reqButton" addKey={incomingKey => addKey(incomingKey)}/>
